@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Items and Market Prices</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+    <h2>Manage Items and Market Prices</h2>
+
+    <h3>Approved Items</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Market Price (₹)</th>
+                <th>Update Market Price (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in admin_items %}
+            <tr>
+                <td>{{ item.item_name }}</td>
+                <td>₹{{ item.market_price }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('manage_items') }}">
+                        <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                        <input type="number" name="market_price" step="0.01" placeholder="New Price" required>
+                        <button type="submit">Update Price</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Pending Items for Approval</h3>
+    {% if pending_items %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Stock</th>
+                <th>Set Market Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pending_item in pending_items %}
+            <tr>
+                <td>{{ pending_item.item_name }}</td>
+                <td>{{ pending_item.stock }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('manage_items') }}">
+                        <input type="hidden" name="pending_item_id" value="{{ pending_item.pending_item_id }}">
+                        <input type="number" name="market_price" step="0.01" placeholder="Set Price" required>
+                        <button type="submit">Approve</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No pending items for approval.</p>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome, Admin</h1>
+    <nav>
+        <ul>
+            <li><a href="/admin/manage_items">Manage items</a></li>
+            <li><a href="/admin/view_farmers">View Registered Farmers</a></li>
+            <li><a href="/admin/view_distribution_teams">Manage Food Distribution Teams</a></li>
+            <li><a href="/admin/view_food_shelters">View Food Shelters</a></li>
+            <li><a href="/admin/view_complaints">View Complaints</a></li>
+            <li><a href="/admin/view_surplus_usage_report">View surplus food item usage</a></li>
+            <li><a href="/admin/admin_change_password">change password</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
+

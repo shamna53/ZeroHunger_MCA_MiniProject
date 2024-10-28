@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Profile</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('farmers_update_profile', farmer_id=farmer.farmer_id) }}" method="POST">
+            <div class="form-group">
+                <label for="username">Full Name</label>
+                <input type="text" id="username" name="username" value="{{ farmer.username }}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ farmer.email }}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_number">Contact Number</label>
+                <input type="text" id="contact_number" name="contact_number" value="{{ farmer.contact_number }}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" value="{{ farmer.location }}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">New Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Leave blank if you don't want to change">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+</body>
+</html>

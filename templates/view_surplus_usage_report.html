@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surplus Usage Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Surplus Usage Report</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Total Quantity (kg)</th>
+                    <th>Used Quantity (kg)</th>
+                    <th>Remaining Quantity (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if usage_reports %}
+                    {% for report in usage_reports %}
+                    <tr>
+                        <td>{{ report.item_name }}</td>
+                        <td>{{ report.total_quantity }} kg</td>
+                        <td>{{ report.used_quantity }} kg</td>
+                        <td>{{ report.remaining_quantity }} kg</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4">No surplus usage data available.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

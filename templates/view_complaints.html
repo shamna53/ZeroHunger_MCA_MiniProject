@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaints</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Complaints</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        {% if complaints %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>User Type</th>
+                        <th>Complaint</th>
+                        <th>Response</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in complaints %}
+                        <tr>
+                            <td>{{ complaint.id }}</td>
+                            <td>{{ complaint.user_id }}</td>
+                            <td>{{ complaint.user_type }}</td>
+                            <td>{{ complaint.text }}</td>
+                            <td>{{ complaint.response or 'No response yet' }}</td>
+                            <td>
+                                {% if not complaint.response %}
+                                    <form action="{{ url_for('respond_complaint', complaint_id=complaint.id) }}" method="POST">
+                                        <input type="text" name="response" placeholder="Enter your response" required>
+                                        <button type="submit">Respond</button>
+                                    </form>
+                                {% else %}
+                                    <em>Response submitted</em>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No complaints to show.</p>
+        {% endif %}
+    </div>
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

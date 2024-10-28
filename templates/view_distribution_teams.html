@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Distribution Teams</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h2>Pending Distribution Teams</h2>
+{% if pending_distributors %}
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for distributor in pending_distributors %}
+        <tr>
+            <td>{{ distributor.username }}</td>
+            <td>{{ distributor.email }}</td>
+            <td>{{ distributor.contact_number }}</td>
+            <td>{{ distributor.location }}</td>
+            <td>
+                <form action="{{ url_for('approve_distributor') }}" method="POST">
+                    <!-- Hidden fields to pass distributor ID and action -->
+                    <input type="hidden" name="distributor_id" value="{{ distributor.distributor_id }}">
+                    <button type="submit" name="action" value="approve">Approve</button>
+                    <button type="submit" name="action" value="reject">Reject</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No pending distribution teams found.</p>
+{% endif %}
+
+<h2>Approved Distribution Teams</h2>
+{% if approved_distributors %}
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for distributor in approved_distributors %}
+        <tr>
+            <td>{{ distributor.username }}</td>
+            <td>{{ distributor.email }}</td>
+            <td>{{ distributor.contact_number }}</td>
+            <td>{{ distributor.location }}</td>
+            <td>{{ distributor.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No approved distribution teams found.</p>
+{% endif %}
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

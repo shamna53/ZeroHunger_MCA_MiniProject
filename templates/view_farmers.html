@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Pending Farmers</h2>
+    {% if pending_farmers %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Location</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for farmer in pending_farmers %}
+            <tr>
+                <td>{{ farmer.farmer_id }}</td>
+                <td>{{ farmer.username }}</td>
+                <td>{{ farmer.email }}</td>
+                <td>{{ farmer.contact_number }}</td>
+                <td>{{ farmer.location }}</td>
+                <td>
+                    <form action="{{ url_for('approve_farmer', farmer_id=farmer.farmer_id) }}" method="POST">
+                        <button type="submit" name="action" value="approve">Approve</button>
+                        <button type="submit" name="action" value="reject">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No pending farmers found.</p>
+{% endif %}
+    <h2>Approved Farmers</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for farmer in approved_farmers %}
+            <tr>
+                <td>{{ farmer.farmer_id }}</td>
+                <td>{{ farmer.username }}</td>
+                <td>{{ farmer.email }}</td>
+                <td>{{ farmer.contact_number }}</td>
+                <td>{{ farmer.location }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

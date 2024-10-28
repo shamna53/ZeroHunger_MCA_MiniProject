@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viewing Surplus Requests</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('food_distributor_dashboard') }}">Back to Dashboard</a>
+    <h1>Viewing Surplus Requests</h1>
+
+    <!-- Pending Requests Table -->
+    <h2>Pending Requests</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Surplus ID</th>
+                <th>Item Name</th>
+                <th>Ordered Quantity</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if pending_requests %}
+                {% for req in pending_requests %}
+                <tr>
+                    <td>{{ req[0].surplus_id }}</td>
+                    <td>{{ req[2] }}</td>  <!-- Access item_name from the query result -->
+                    <td>{{ req[1] if req[1] else 0 }}</td>  <!-- Display ordered_quantity or 0 if no ShelterOrder -->
+                    <td>{{ req[0].date_added.strftime('%Y-%m-%d') }}</td>
+
+                        <td>
+    <form action="{{ url_for('approve_surplus_request', surplus_id=req[0].surplus_id) }}" method="post" style="display:inline;">
+        <button type="submit">Approve</button>
+    </form>
+    <form action="{{ url_for('reject_surplus_request', surplus_id=req[0].surplus_id) }}" method="post" style="display:inline;">
+        <button type="submit">Reject</button>
+    </form>
+</td>
+
+
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">No pending requests available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Approved Requests Table -->
+    <h2>Approved Requests</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Surplus ID</th>
+                <th>Item Name</th>
+                <th>Ordered Quantity</th>
+                <th>Date Added</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% if approved_requests %}
+                {% for req in approved_requests %}
+                <tr>
+                    <td>{{ req[0].surplus_id }}</td>
+                    <td>{{ req[2] }}</td>
+                    <td>{{ req[1] if req[1] else 0 }}</td>
+                    <td>{{ req[0].date_added.strftime('%Y-%m-%d') }}</td>
+
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">No approved requests available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Rejected Requests Table -->
+    <h2>Rejected Requests</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Surplus ID</th>
+                <th>Item Name</th>
+                <th>Ordered Quantity</th>
+                <th>Date Added</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% if rejected_requests %}
+                {% for req in rejected_requests %}
+                <tr>
+                    <td>{{ req[0].surplus_id }}</td>
+                    <td>{{ req[2] }}</td>
+                    <td>{{ req[1] if req[1] else 0 }}</td>
+                    <td>{{ req[0].date_added.strftime('%Y-%m-%d') }}</td>
+
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">No rejected requests available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>

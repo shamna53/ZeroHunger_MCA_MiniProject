@@ -1,0 +1,140 @@
+/* login.css */
+body {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;    /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    min-height: 100vh;      /* Full viewport height */
+    background-color: #1e1e2f; /* Background color */
+}
+
+/* Style for the page title */
+.page-title {
+    text-align: center;  /* Center the title */
+    font-size: 36px;     /* Larger font size */
+    color: #ffffff;      /* White color for the title */
+    margin-top: 20px;    /* Space above the title */
+    margin-bottom: 30px; /* Space below the title */
+    font-weight: bold;    /* Make the title bold */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #1e1e2f, #2d2d3a); /* Gradient background */
+    color: #ffffff; /* Text color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height for centering */
+}
+
+.login-container {
+    width: 400px; /* Fixed width for the login box */
+    background-color: rgba(45, 45, 58, 0.95); /* Semi-transparent background */
+    padding: 40px;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Shadow for depth */
+    text-align: center; /* Center text */
+}
+
+h2 {
+    color: #e0e0e0; /* Light gray color for the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    font-size: 28px; /* Font size for the heading */
+}
+
+ul {
+    list-style-type: none; /* Remove default list styling */
+    margin-bottom: 20px; /* Space below the list */
+}
+
+ul li {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px; /* Space between messages */
+}
+
+ul li.success {
+    background-color: #4caf50; /* Green for success messages */
+}
+
+ul li.error {
+    background-color: #f44336; /* Red for error messages */
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%; /* Full width input fields */
+    padding: 12px; /* Padding inside the input fields */
+    margin-bottom: 20px; /* Space below each input field */
+    border: 2px solid #3a3a4d; /* Border for input fields */
+    border-radius: 6px; /* Rounded corners */
+    background-color: #3a3a4d; /* Background color for input fields */
+    color: #ffffff; /* Text color inside input fields */
+    font-size: 16px; /* Font size for input text */
+    transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #5a9ff7; /* Highlight border on focus */
+    outline: none; /* Remove outline on focus */
+}
+
+button {
+    width: 100%; /* Full width button */
+    padding: 12px; /* Padding inside the button */
+    border: none; /* Remove default border */
+    border-radius: 6px; /* Rounded corners */
+    background-color: #5a9ff7; /* Button background color */
+    color: #ffffff; /* Button text color */
+    font-size: 18px; /* Font size for button text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+button:hover {
+    background-color: #4a8bcf; /* Darker button background on hover */
+}
+
+p {
+    margin-top: 20px; /* Space above the paragraph */
+}
+
+p a {
+    color: #5a9ff7; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+p a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Responsive styling */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px; /* Reduced padding for smaller screens */
+    }
+
+    h2 {
+        font-size: 24px; /* Smaller font size for heading */
+    }
+
+    button {
+        font-size: 16px; /* Smaller font size for button */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select {
+        font-size: 14px; /* Smaller font size for input fields */
+    }
+}

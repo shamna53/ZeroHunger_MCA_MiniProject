@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelter Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ shelter.username }}</h2>
+
+        <!-- Navigation for shelter's actions -->
+        <nav>
+            <ul>
+                <!-- Pass the shelter_id to the URL -->
+                <li><a href="{{ url_for('shelter_update_profile', shelter_id=shelter.shelter_id) }}">Edit Profile</a></li>
+                <li><a href="{{ url_for('view_and_order_surplus_items', shelter_id=shelter.shelter_id) }}">View and Order Surplus Food Items</a></li>
+                <li><a href="{{ url_for('view_processed_orders', shelter_id=shelter.shelter_id) }}">View Approved and Rejected Orders</a></li>
+                <li><a href="{{ url_for('shelter_submit_complaint') }}">Send Complaint</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

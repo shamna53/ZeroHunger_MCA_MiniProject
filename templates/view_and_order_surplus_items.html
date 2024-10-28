@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View and Order Surplus Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('shelter_dashboard') }}">Back to Dashboard</a>
+    <h1>Available Surplus Items</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity Available</th>
+                <th>Order</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for surplus_item in surplus_items %}
+            <tr>
+                <td>{{ surplus_item[2] }}</td>  <!-- item_name -->
+                <td>{{ surplus_item[3] }}</td>  <!-- total_quantity -->
+                <td>
+                    <form method="POST" action="{{ url_for('view_and_order_surplus_items', shelter_id=shelter_id) }}">
+                        <input type="hidden" name="item_id" value="{{ surplus_item[1] }}">  <!-- item_id -->
+                        <input type="hidden" name="surplus_id" value="{{ surplus_item[0] }}">  <!-- surplus_id -->
+                        <input type="number" name="quantity" min="1" max="{{ surplus_item[3] }}" required>
+                        <button type="submit">Order</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No surplus items available.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,279 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Page title styling */
+h1, h2 {
+    text-align: center;
+    color: #4CAF50;
+    margin-top: 20px;
+}
+
+/* Navigation bar styles */
+nav {
+    background-color: #4CAF50;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #45a049;
+}
+
+/* Forms styling */
+form {
+    width: 50%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Tables styling */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Form buttons for approval/rejection */
+form button {
+    margin-right: 5px;
+}
+
+/* Success/Failure messages */
+.message {
+    text-align: center;
+    margin: 20px auto;
+    padding: 15px;
+    width: 50%;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.message.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.message.error {
+    background-color: #f44336;
+    color: white;
+}
+.status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+        }
+        .approved { background-color: #4CAF50; }  /* Green for approved */
+        .rejected { background-color: #f44336; }  /* Red for rejected */
+        .pending { background-color: #ff9800; }   /* Orange for pending */
+/* Input error styling */
+input[type="text"]:invalid,
+input[type="password"]:invalid,
+input[type="number"]:invalid,
+input[type="url"]:invalid {
+    border-color: #f44336;
+}
+
+/* Pagination controls (optional) */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    color: #4CAF50;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    nav ul li {
+        display: block;
+        text-align: left;
+        margin: 10px 0;
+    }
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #dddddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+input[type="number"] {
+    width: 80px;
+    padding: 5px;
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.alert {
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}

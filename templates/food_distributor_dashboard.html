@@ -1,0 +1,30 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Distributor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ distributor.username }}</h2>
+
+        <!-- Navigation for distributor's actions -->
+        <nav>
+            <ul>
+                <!-- Pass the distributor_id to the URL where necessary -->
+                <li><a href="{{ url_for('distributor_update_profile', distributor_id=distributor.distributor_id) }}">View & Edit Profile</a></li>
+                <li><a href="{{ url_for('search_market') }}">Search Market for Items</a></li>
+                <li><a href="{{ url_for('cart_items') }}">View Cart</a></li>
+                <li><a href="{{ url_for('distributor_add_surplus') }}">Add Surplus Food Stock</a></li>
+                <li><a href="{{ url_for('view_surplus_requests') }}">View Surplus Requests</a></li>
+                <li><a href="{{ url_for('distributor_submit_complaint') }}">Send Complaint</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

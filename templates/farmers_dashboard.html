@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ farmer.username }}</h2>
+
+        <!-- Navigation for farmer's actions -->
+        <nav>
+            <ul>
+                <!-- Pass the farmer_id to the URL -->
+                <li><a href="{{ url_for('farmers_update_profile', farmer_id=farmer.farmer_id) }}">Edit Profile</a></li>
+                <li><a href="{{ url_for('farmers_manage_stock') }}">Manage Stock</a></li>
+                <li><a href="{{ url_for('farmers_view_orders') }}">View Orders</a></li>
+                <li><a href="{{ url_for('farmer_submit_complaint') }}">Send Complaint</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('search_market') }}">Back to order more items</a>
+    <h1>Your Cart Items</h1>
+
+    <!-- Pending Orders -->
+    <h3>Pending Orders</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Farmer</th>
+                <th>Payment Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set has_pending_orders = false %}
+            {% for order in orders %}
+                {% if order.status == 'pending' %}
+                {% set has_pending_orders = true %}
+                <tr>
+                    <td>{{ order.item.item_name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.farmer.username }}</td>
+                    <td>{{ order.payment_status }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('cancel_order', order_id=order.order_id) }}" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                            <button type="submit">Cancel Order</button>
+                        </form>
+
+
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            {% if not has_pending_orders %}
+                <tr>
+                    <td colspan="6">No pending orders available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Approved Orders -->
+    <h3>Approved Orders</h3>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Farmer</th>
+                <th>Payment Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set has_approved_orders = false %}
+            {% for order in orders %}
+                {% if order.status == 'approved' %}
+                {% set has_approved_orders = true %}
+                <tr>
+                    <td>{{ order.item.item_name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.farmer.username }}</td>
+                    <td>{{ order.payment_status }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('delete_cart_item', order_id=order.order_id) }}" onsubmit="return confirm('Are you sure you want to delete this item from the cart?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            {% if not has_approved_orders %}
+                <tr>
+                    <td colspan="6">No approved orders available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Rejected Orders -->
+    <h3>Rejected Orders</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Farmer</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set has_rejected_orders = false %}
+            {% for order in orders %}
+                {% if order.status == 'rejected' %}
+                {% set has_rejected_orders = true %}
+                <tr>
+                    <td>{{ order.item.item_name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.farmer.username }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('delete_cart_item', order_id=order.order_id) }}" onsubmit="return confirm('Are you sure you want to delete this item from the cart?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            {% if not has_rejected_orders %}
+                <tr>
+                    <td colspan="5">No rejected orders available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+<a href="{{ url_for('search_market') }}">Back to order more items</a>
+</body>
+</html>

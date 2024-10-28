@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Pending Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Approve Pending Items</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Pending Item ID</th>
+                <th>Item Name</th>
+                <th>Stock</th>
+                <th>Farmer ID</th>
+                <th>Set Market Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pending_item in pending_items %}
+            <tr>
+                <td>{{ pending_item.pending_item_id }}</td>
+                <td>{{ pending_item.item_name }}</td>
+                <td>{{ pending_item.stock }}</td>
+                <td>{{ pending_item.farmer_id }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('manage_pending_items') }}">
+                        <input type="hidden" name="pending_item_id" value="{{ pending_item.pending_item_id }}">
+                        <input type="number" name="market_price" placeholder="Enter market price" required>
+                        <button type="submit">Approve</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

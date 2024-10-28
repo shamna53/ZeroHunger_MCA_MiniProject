@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Shelters</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Pending Food Shelters</h2>
+    {% if pending_shelters %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Location</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shelter in pending_shelters %}
+            <tr>
+                <td>{{ shelter.shelter_id }}</td>
+                <td>{{ shelter.username }}</td>
+                <td>{{ shelter.email }}</td>
+                <td>{{ shelter.contact_number }}</td>
+                <td>{{ shelter.location }}</td>
+                <td>
+                    <form action="{{ url_for('view_food_shelters') }}" method="POST">
+                        <input type="hidden" name="shelter_id" value="{{ shelter.shelter_id }}">
+                        <button type="submit" name="action" value="approve">Approve</button>
+                        <button type="submit" name="action" value="reject">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No pending food shelters found.</p>
+{% endif %}
+
+    <h2>Approved Food Shelters</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shelter in approved_shelters %}
+            <tr>
+                <td>{{ shelter.shelter_id }}</td>
+                <td>{{ shelter.username }}</td>
+                <td>{{ shelter.email }}</td>
+                <td>{{ shelter.contact_number }}</td>
+                <td>{{ shelter.location }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

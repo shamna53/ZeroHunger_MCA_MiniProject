@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Price</title>
+</head>
+<body>
+    <h2>Update Item Price</h2>
+    <form action="{{ url_for('update_price') }}" method="POST">
+        <label for="item_id">Item ID:</label>
+        <input type="text" name="item_id" id="item_id" required>
+
+        <label for="new_price">New Price:</label>
+        <input type="text" name="new_price" id="new_price" required>
+
+        <button type="submit">Update Price</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
+

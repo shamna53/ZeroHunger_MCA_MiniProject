@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Stock</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('farmer_dashboard') }}">Back to Dashboard</a>
+    <h2>Manage Stock</h2>
+    <form method="POST" action="{{ url_for('farmers_manage_stock') }}">
+        <!-- Select Existing Approved Item -->
+        <label for="admin_item_id">Select Approved Item:</label>
+        <select name="admin_item_id" id="admin_item_id" onchange="toggleStockField()">
+            <option value="">-- Select an approved item --</option>
+            {% for item in admin_items %}
+                <option value="{{ item.item_id }}">{{ item.item_name }} (₹{{ item.market_price }} per kg)</option>
+            {% endfor %}
+        </select>
+
+        <br>
+
+        <!-- Or Add New Item for Approval -->
+        <label for="item_name">Or Add New Item:</label>
+        <input type="text" name="item_name" id="item_name" placeholder="New Item Name" oninput="toggleStockField()">
+
+        <!-- Stock (only required for approved items) -->
+        <label for="stock">Enter Stock (kg):</label>
+        <input type="number" name="stock" id="stock" placeholder="Enter Stock in kg">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Your Items and Stock</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Stock (kg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.stock }} kg</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <script>
+        function toggleStockField() {
+            const adminItemSelect = document.getElementById('admin_item_id').value;
+            const newItemInput = document.getElementById('item_name').value;
+            const stockField = document.getElementById('stock');
+
+            // Require stock only if an approved item is selected
+            stockField.required = !!adminItemSelect && !newItemInput;
+        }
+    </script>
+</body>
+</html>

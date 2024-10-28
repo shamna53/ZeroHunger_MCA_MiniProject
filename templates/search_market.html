@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Market</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('food_distributor_dashboard') }}">Back to Dashboard</a>
+    <h2>Search Market for Items</h2>
+
+    <!-- Search Form -->
+    <form method="POST" action="{{ url_for('search_market') }}">
+        <input type="text" name="item_name" placeholder="Search for an item">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Display Search Results -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Stock</th>
+                <th>Market Price</th>
+                <th>Farmer</th>
+                <th>Add to Cart</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if search_results %}
+                {% for item in search_results %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.stock }}</td>
+                    <td>{{ item.market_price }}</td>
+                    <td>{{ item.farmer.username }}<br>
+                    Location:{{ item.farmer.location }}<br>
+                    Contact Number:{{ item.farmer.contact_number }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('add_to_cart') }}">
+                            <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" name="quantity" min="1" required>
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="7">No items available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+</body>
+</html>

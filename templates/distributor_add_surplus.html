@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Surplus Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('food_distributor_dashboard') }}">Back to Dashboard</a>
+    <div class="container">
+        <h2>Add or Update Surplus Food Item</h2>
+
+        <!-- Add New Surplus Item Form -->
+        <form action="{{ url_for('distributor_add_surplus') }}" method="POST">
+    <input type="hidden" name="distributor_id" value="{{ current_distributor_id }}">
+    <label for="item_id">Select Item:</label>
+    <select id="item_id" name="item_id" required>
+        <option value="" disabled selected>Select an item</option>
+        {% for item in available_items %}
+            <option value="{{ item.item_id }}">{{ item.item_name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="quantity">Quantity (kg):</label>
+    <input type="number" id="quantity" name="quantity" required min="1">
+    <button type="submit">Add/Update Surplus</button>
+</form>
+
+
+        <!-- Display Surplus Items for Current Distributor -->
+        <h2>Your Surplus Items and Stock</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity (kg)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% if surplus_food %}
+                    {% for surplus in surplus_food %}
+                    <tr>
+                        <td>{{ surplus.item.item_name }}</td>
+                        <td>{{ surplus.quantity }} kg</td>
+
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3">No surplus items found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

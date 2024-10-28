@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a href="{{ url_for('food_distributor_dashboard') }}">Back to Dashboard</a>
+    <div class="container">
+        <h2>Submit Complaint ({{ user_type }})</h2>
+
+        <form action="{{ url_for('distributor_submit_complaint') }}" method="POST">
+            <!-- Make sure the hidden input references the correct session key -->
+            <input type="hidden" name="user_id" value="{{ session.get('distributor_id') }}">
+            <div class="form-group">
+                <label for="text">Complaint:</label>
+                <textarea id="text" name="text" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Complaint</button>
+        </form>
+
+        <hr>
+
+        <h3>Your Previous Complaints</h3>
+        {% if complaints %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Complaint</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in complaints %}
+                        <tr>
+                            <td>{{ complaint.text }}</td>
+                            <td>{{ complaint.response or "No response yet." }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No previous complaints found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

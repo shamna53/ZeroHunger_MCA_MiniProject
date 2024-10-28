@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Approved Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Your Approved Items</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Market Price (₹)</th>
+                <th>Update Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in approved_items %}
+            <tr>
+                <td>{{ item.item_name }}</td>
+                <td>₹{{ item.market_price }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('farmer_update_stock') }}">
+                        <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                        <input type="number" name="stock" step="1" placeholder="Stock quantity" required>
+                        <button type="submit">Update Stock</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
